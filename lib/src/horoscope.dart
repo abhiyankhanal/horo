@@ -11,19 +11,8 @@ class Horoscope extends StatefulWidget {
 }
 
 class _HoroscopeState extends State<Horoscope> {
-  Map data;
-  var aries,
-      taurus,
-      gemini,
-      cancer,
-      leo,
-      virgo,
-      libra,
-      sagittarius,
-      capricorn,
-      aquarius,
-      pisces,
-      scorpio;
+  Map<String, dynamic> data;
+  List<Map<String, dynamic>> horo = [];
   String rashi;
   Future fetch(rashi) async {
     http.Response response = await http.get(
@@ -38,18 +27,18 @@ class _HoroscopeState extends State<Horoscope> {
   }
 
   Future load() async {
-    aries = await fetch("aries");
-    taurus = await fetch("taurus");
-    gemini = await fetch("gemini");
-    cancer = await fetch("cancer");
-    leo = await fetch("leo");
-    virgo = await fetch("virgo");
-    libra = await fetch("libra");
-    sagittarius = await fetch("SAGITTARIUS");
-    capricorn = await fetch("CAPRICORN");
-    aquarius = await fetch("AQUARIUS");
-    pisces = await fetch("PISCES");
-    scorpio = await fetch("scorpio");
+    horo[1] = await fetch("aries");
+    horo[1] = await fetch("taurus");
+    horo[2] = await fetch("gemini");
+    horo[3] = await fetch("cancer");
+    horo[4] = await fetch("leo");
+    horo[5] = await fetch("virgo");
+    horo[6] = await fetch("libra");
+    horo[7] = await fetch("SAGITTARIUS");
+    horo[8] = await fetch("CAPRICORN");
+    horo[9] = await fetch("AQUARIUS");
+    horo[10] = await fetch("PISCES");
+    horo[11] = await fetch("scorpio");
     print('data fetched successfully');
   }
 
@@ -63,7 +52,7 @@ class _HoroscopeState extends State<Horoscope> {
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
-    if (scorpio != null) {
+    if (horo[11] != null) {
       return Scaffold(
         body: SingleChildScrollView(
           child: Stack(overflow: Overflow.visible, children: <Widget>[
@@ -128,7 +117,7 @@ class _HoroscopeState extends State<Horoscope> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  scorpio['sunsign'].toUpperCase(),
+                                  horo[11]['sunsign'].toUpperCase(),
                                   style: TextStyle(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w400,
@@ -137,7 +126,7 @@ class _HoroscopeState extends State<Horoscope> {
                                 ),
                                 SizedBox(height: 5.0),
                                 Text(
-                                  scorpio['horoscope'],
+                                  horo[11]['horoscope'],
                                   style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 13.0,
