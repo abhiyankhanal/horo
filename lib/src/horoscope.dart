@@ -20,18 +20,30 @@ class _HoroscopeState extends State<Horoscope> {
     "leo",
     "virgo",
     "libra",
+    "scorpio",
     "sagittarius",
     "capricorn",
     "aquarius",
-    "pisces",
-    "scorpio"
+    "pisces"
   ];
-  //List img_url = ["", "", "", "", "", "", "", "", "", "", "",""];
+  List img_url = [
+    "assets/zodiac/0.png",
+    "assets/zodiac/1.png",
+    "assets/zodiac/2.png",
+    "assets/zodiac/3.png",
+    "assets/zodiac/4.png",
+    "assets/zodiac/5.png",
+    "assets/zodiac/6.png",
+    "assets/zodiac/7.png",
+    "assets/zodiac/8.png",
+    "assets/zodiac/9.png",
+    "assets/zodiac/10.png",
+    "assets/zodiac/11.png"
+  ];
   String rashi;
   Future fetch(rashi) async {
-    http.Response response = await http.get(
-      "https://horoscope-api.herokuapp.com/horoscope/today/" + rashi,
-    );
+    http.Response response = await http
+        .get("https://horoscope-api.herokuapp.com/horoscope/today/" + rashi);
 
     setState(() {
       data = jsonDecode(response.body);
@@ -48,11 +60,11 @@ class _HoroscopeState extends State<Horoscope> {
     horo[4] = await fetch("leo");
     horo[5] = await fetch("virgo");
     horo[6] = await fetch("libra");
-    horo[7] = await fetch("SAGITTARIUS");
-    horo[8] = await fetch("CAPRICORN");
-    horo[9] = await fetch("AQUARIUS");
-    horo[10] = await fetch("PISCES");
-    horo[11] = await fetch("scorpio");
+    horo[7] = await fetch("scorpio");
+    horo[8] = await fetch("sagittarius");
+    horo[9] = await fetch("CAPRICORN");
+    horo[10] = await fetch("aquarius");
+    horo[11] = await fetch("PISCES");
     print('data fetched successfully');
   }
 
@@ -128,7 +140,7 @@ class _HoroscopeState extends State<Horoscope> {
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
-                                        image: AssetImage("assets/1.jpg"),
+                                        image: AssetImage(img_url[index]),
                                         fit: BoxFit.cover),
                                   ),
                                 ),
@@ -166,71 +178,7 @@ class _HoroscopeState extends State<Horoscope> {
                     );
                   },
                 ),
-              )
-              // child: Column(
-              //   children: <Widget>[
-              //     Container(
-              //       width: _width * 0.95,
-              //       margin: EdgeInsets.all(10.0),
-              //       decoration: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(10.0),
-              //         color: cardCol,
-              //         boxShadow: [
-              //           BoxShadow(
-              //             color: shadowCol.withOpacity(0.7),
-              //             //spreadRadius: 2,
-              //             blurRadius: 9,
-              //             offset: Offset(0, 3), // changes position of shadow
-              //           ),
-              //         ],
-              //       ),
-              //       child: Padding(
-              //         padding: const EdgeInsets.all(10.0),
-              //         child: Row(
-              //           children: <Widget>[
-              //             Container(
-              //               height: _height * 0.13,
-              //               width: _width * 0.2,
-              //               decoration: BoxDecoration(
-              //                 borderRadius: BorderRadius.circular(10.0),
-              //                 image: DecorationImage(
-              //                     image: AssetImage("assets/1.jpg"),
-              //                     fit: BoxFit.cover),
-              //               ),
-              //             ),
-              //             SizedBox(width: 25.0),
-              //             Flexible(
-              //               child: Column(
-              //                 crossAxisAlignment: CrossAxisAlignment.start,
-              //                 children: <Widget>[
-              //                   Text(
-              //                     horo[11]['sunsign'].toUpperCase(),
-              //                     style: TextStyle(
-              //                       fontSize: 16.0,
-              //                       fontWeight: FontWeight.w400,
-              //                       color: mainCol,
-              //                     ),
-              //                   ),
-              //                   SizedBox(height: 5.0),
-              //                   Text(
-              //                     horo[11]['horoscope'],
-              //                     style: TextStyle(
-              //                       fontWeight: FontWeight.w500,
-              //                       fontSize: 13.0,
-              //                     ),
-              //                     maxLines: 3,
-              //                   ),
-              //                 ],
-              //               ),
-              //             )
-              //           ],
-              //         ),
-              //       ),
-              //     ),
-
-              //   ],
-              // ),
-              ),
+              )),
         ]),
       );
     } else {
