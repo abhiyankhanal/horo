@@ -25,7 +25,7 @@ dependencies:
     sdk: flutter
   carousel_slider: ^3.0.0
   cupertino_icons: ^1.0.0
-  http: 
+  http: ^0.12.2
 
 dev_dependencies:
   flutter_test:
@@ -44,6 +44,18 @@ flutter:
   assets:
     - assets/1.jpg
     - assets/3.jpg
+    - assets/zodiac/0.png
+    - assets/zodiac/1.png
+    - assets/zodiac/2.png
+    - assets/zodiac/3.png
+    - assets/zodiac/4.png
+    - assets/zodiac/5.png
+    - assets/zodiac/6.png
+    - assets/zodiac/7.png
+    - assets/zodiac/8.png
+    - assets/zodiac/9.png
+    - assets/zodiac/10.png
+    - assets/zodiac/11.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
