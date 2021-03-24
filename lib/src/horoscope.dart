@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:new_jyotish/apiservice.dart';
 import 'package:new_jyotish/constants/color.dart';
-import 'package:http/http.dart' as http;
 import 'package:new_jyotish/models/horoscope.dart';
 
 class Horoscope extends StatefulWidget {
@@ -11,21 +11,10 @@ class Horoscope extends StatefulWidget {
 }
 
 class _HoroscopeState extends State<Horoscope> {
+  ApiService _api = ApiService();
   Map<String, dynamic> data;
-  List horo = [
-    "aries",
-    "taurus",
-    "gemini",
-    "cancer",
-    "leo",
-    "virgo",
-    "libra",
-    "scorpio",
-    "sagittarius",
-    "capricorn",
-    "aquarius",
-    "pisces"
-  ];
+  List<Horo> _horoscope = [];
+
   List img_url = [
     "assets/zodiac/0.png",
     "assets/zodiac/1.png",
@@ -40,37 +29,27 @@ class _HoroscopeState extends State<Horoscope> {
     "assets/zodiac/10.png",
     "assets/zodiac/11.png"
   ];
-  String rashi;
-  Future fetch(rashi) async {
-    http.Response response = await http
-        .get("https://horoscope-api.herokuapp.com/horoscope/today/" + rashi);
-
-    setState(() {
-      data = jsonDecode(response.body);
-      // Horo.fromJson(data);
-    });
-    return data;
-  }
 
   Future load() async {
-    horo[0] = await fetch("aries");
-    horo[1] = await fetch("taurus");
-    horo[2] = await fetch("gemini");
-    horo[3] = await fetch("cancer");
-    horo[4] = await fetch("leo");
-    horo[5] = await fetch("virgo");
-    horo[6] = await fetch("libra");
-    horo[7] = await fetch("scorpio");
-    horo[8] = await fetch("sagittarius");
-    horo[9] = await fetch("CAPRICORN");
-    horo[10] = await fetch("aquarius");
-    horo[11] = await fetch("PISCES");
+    await _api.fetch("aries").then((value) => _horoscope.add(value));
+    await _api.fetch("taurus").then((value) => _horoscope.add(value));
+    await _api.fetch("gemini").then((value) => _horoscope.add(value));
+    await _api.fetch("cancer").then((value) => _horoscope.add(value));
+    await _api.fetch("leo").then((value) => _horoscope.add(value));
+    await _api.fetch("virgo").then((value) => _horoscope.add(value));
+    await _api.fetch("libra").then((value) => _horoscope.add(value));
+    await _api.fetch("scorpio").then((value) => _horoscope.add(value));
+    await _api.fetch("sagittarius").then((value) => _horoscope.add(value));
+    await _api.fetch("capricorn").then((value) => _horoscope.add(value));
+    await _api.fetch("aquarius").then((value) => _horoscope.add(value));
+    await _api.fetch("pisces").then((value) => _horoscope.add(value));
+
     print('data fetched successfully');
   }
 
   @override
   void initState() {
-    load();
+    //load();
     super.initState();
   }
 
@@ -78,9 +57,10 @@ class _HoroscopeState extends State<Horoscope> {
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
-    if (horo[11] != null) {
-      return Scaffold(
-        body: Stack(overflow: Overflow.visible, children: <Widget>[
+
+    return Scaffold(
+      body: Container(
+        child: Stack(overflow: Overflow.visible, children: <Widget>[
           Container(
             height: _height * 0.2,
             decoration: BoxDecoration(
@@ -103,89 +83,87 @@ class _HoroscopeState extends State<Horoscope> {
             ),
           ),
           Positioned(
-              top: _height * 0.08,
+              top: _height * 0.12,
               left: _width * 0,
               child: Container(
-                height: _height,
-                width: _width,
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: horo.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: <Widget>[
-                        Container(
-                          width: _width * 0.95,
-                          margin: EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: cardCol,
-                            boxShadow: [
-                              BoxShadow(
-                                color: shadowCol.withOpacity(0.7),
-                                //spreadRadius: 2,
-                                blurRadius: 9,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Row(
-                              children: <Widget>[
-                                Container(
-                                  height: _height * 0.15,
-                                  width: _width * 0.2,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                        image: AssetImage(img_url[index]),
-                                        fit: BoxFit.cover),
-                                  ),
+                  height: _height,
+                  width: _width,
+                  child: FutureBuilder(
+                      future: ApiService().fetch('leo'),
+                      builder: (context, snap) {
+                        if (snap.connectionState == ConnectionState.done &&
+                            snap.hasData) {
+                          Horo hor = snap.data;
+                          return Column(
+                            children: <Widget>[
+                              Container(
+                                width: _width * 0.95,
+                                margin: EdgeInsets.all(10.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  color: cardCol,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: shadowCol.withOpacity(0.7),
+                                      //spreadRadius: 2,
+                                      blurRadius: 9,
+                                      offset: Offset(
+                                          0, 3), // changes position of shadow
+                                    ),
+                                  ],
                                 ),
-                                SizedBox(width: 25.0),
-                                Flexible(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Row(
                                     children: <Widget>[
-                                      Text(
-                                        horo[index]['sunsign'].toUpperCase(),
-                                        style: TextStyle(
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.w400,
-                                          color: mainCol,
+                                      Container(
+                                        height: _height * 0.15,
+                                        width: _width * 0.2,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                              image: AssetImage(img_url[0]),
+                                              fit: BoxFit.cover),
                                         ),
                                       ),
-                                      SizedBox(height: 3.0),
-                                      Text(
-                                        horo[index]['horoscope'],
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 13.0,
+                                      SizedBox(width: 25.0),
+                                      Flexible(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              hor.sunsign,
+                                              style: TextStyle(
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.w400,
+                                                color: mainCol,
+                                              ),
+                                            ),
+                                            SizedBox(height: 3.0),
+                                            Text(
+                                              hor.horoscope,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 13.0,
+                                              ),
+                                              // maxLines: 4,
+                                            ),
+                                          ],
                                         ),
-                                        // maxLines: 4,
-                                      ),
+                                      )
                                     ],
                                   ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              )),
+                                ),
+                              ),
+                            ],
+                          );
+                        } else {
+                          return CircularProgressIndicator();
+                        }
+                      }))),
         ]),
-      );
-    } else {
-      return Scaffold(
-          body: Center(
-        child: CircularProgressIndicator(),
-      ));
-    }
+      ),
+    );
   }
 }
