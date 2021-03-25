@@ -59,7 +59,7 @@ class HoroCard extends StatelessWidget {
                                   hor.sunsign.toUpperCase(),
                                   style: TextStyle(
                                     fontSize: 16.0,
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w500,
                                     color: mainCol,
                                   ),
                                 );
@@ -69,9 +69,9 @@ class HoroCard extends StatelessWidget {
                             Consumer<ApiService>(
                                 builder: (context, data, child) {
                               return Text(
-                                hor.sunsign.toUpperCase(),
+                                hor.horoscope,
                                 style: TextStyle(
-                                  fontSize: 16.0,
+                                  fontSize: 13.0,
                                   fontWeight: FontWeight.w400,
                                   color: mainCol,
                                 ),

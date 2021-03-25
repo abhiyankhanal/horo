@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:new_jyotish/apiservice.dart';
 import 'package:new_jyotish/src/home.dart';
 import 'package:new_jyotish/src/horoscope.dart';
 import 'package:new_jyotish/src/jyotish_profile.dart';
-import 'package:new_jyotish/controller/horoscope.dart';
 import 'package:provider/provider.dart';
 
-import 'models/horoscope.dart';
-
 void main() {
-  runApp(MyApp());
+  runApp(MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => ApiService())],
+      child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -21,22 +21,17 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     // final height = MediaQuery.of(context).size.height;
     // final width = MediaQuery.of(context).size.width;
-    return ChangeNotifierProvider(
-      create: (context) {
-        Horo();
+    return MaterialApp(
+      title: "Jyotish",
+      debugShowCheckedModeBanner: false,
+      initialRoute: "/",
+      routes: {
+        "/": (_) => Home(),
+        "/profileScreen": (_) => JyotishProfile(),
+        "/horoscopeScreen": (_) => Horoscope(),
+        // "/thankYou": (_) => ThankYou(),
+        // "/horoscpeController": (_) => HoroscopeContriller(),
       },
-      child: MaterialApp(
-        title: "Jyotish",
-        debugShowCheckedModeBanner: false,
-        initialRoute: "/",
-        routes: {
-          "/": (_) => Home(),
-          "/profileScreen": (_) => JyotishProfile(),
-          "/horoscopeScreen": (_) => Horoscope(),
-          // "/thankYou": (_) => ThankYou(),
-          // "/horoscpeController": (_) => HoroscopeContriller(),
-        },
-      ),
     );
   }
 }
