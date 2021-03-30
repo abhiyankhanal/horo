@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "474513419085",
+    "project_id": "horoscope-43888",
+    "storage_bucket": "horoscope-43888.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474513419085:android:9dd183188984e1470f2504",
+        "android_client_info": {
+          "package_name": "com.example.new_jyotish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "474513419085-p50fvabnd1ljvk2a4krhhbiag15fuimt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYg4_vqDXVQa2HBzo9SM3Cs0ZOkuno4N8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "474513419085-p50fvabnd1ljvk2a4krhhbiag15fuimt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -75,7 +75,8 @@ class Explore extends StatelessWidget {
                     Column(
                       children: [
                         MaterialButton(
-                          onPressed: () {},
+                          onPressed: () =>
+                              Navigator.of(context).pushNamed("/jsewaScreen"),
                           shape: CircleBorder(),
                           elevation: 2.0,
                           color: Colors.white,

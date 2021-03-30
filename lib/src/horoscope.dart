@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:new_jyotish/apiservice.dart';
+import 'package:new_jyotish/services/apiservice.dart';
 import 'package:new_jyotish/constants/color.dart';
 import 'package:new_jyotish/models/horoscope.dart';
 import 'package:new_jyotish/src/widget/horocard.dart';
@@ -88,53 +88,17 @@ class _HoroscopeState extends State<Horoscope> {
                   height: _height * 0.1,
                 ),
                 HoroCard(rashi: "aries", img: "assets/zodiac/0.png"),
-                SizedBox(
-                  height: 5.0,
-                ),
                 HoroCard(rashi: "taurus", img: "assets/zodiac/1.png"),
-                SizedBox(
-                  height: 5.0,
-                ),
                 HoroCard(rashi: "gemini", img: "assets/zodiac/2.png"),
-                SizedBox(
-                  height: 5.0,
-                ),
                 HoroCard(rashi: "cancer", img: "assets/zodiac/3.png"),
-                SizedBox(
-                  height: 5.0,
-                ),
                 HoroCard(rashi: "leo", img: "assets/zodiac/4.png"),
-                SizedBox(
-                  height: 5.0,
-                ),
                 HoroCard(rashi: "virgo", img: "assets/zodiac/5.png"),
-                SizedBox(
-                  height: 5.0,
-                ),
                 HoroCard(rashi: "libra", img: "assets/zodiac/6.png"),
-                SizedBox(
-                  height: 5.0,
-                ),
                 HoroCard(rashi: "scorpio", img: "assets/zodiac/7.png"),
-                SizedBox(
-                  height: 5.0,
-                ),
                 HoroCard(rashi: "sagittarius", img: "assets/zodiac/8.png"),
-                SizedBox(
-                  height: 5.0,
-                ),
                 HoroCard(rashi: "capricorn", img: "assets/zodiac/9.png"),
-                SizedBox(
-                  height: 5.0,
-                ),
                 HoroCard(rashi: "aquarius", img: "assets/zodiac/10.png"),
-                SizedBox(
-                  height: 5.0,
-                ),
                 HoroCard(rashi: "pisces", img: "assets/zodiac/11.png"),
-                SizedBox(
-                  height: 5.0,
-                ),
               ],
             ),
           ),

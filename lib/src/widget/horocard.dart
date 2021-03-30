@@ -3,7 +3,7 @@ import 'package:new_jyotish/constants/color.dart';
 import 'package:new_jyotish/models/horoscope.dart';
 import 'package:provider/provider.dart';
 
-import '../../apiservice.dart';
+import '../../services/apiservice.dart';
 
 class HoroCard extends StatelessWidget {
   String img;
